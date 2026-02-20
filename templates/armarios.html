@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Armários da Escola - SENAI-SP</title>
+  <link rel="stylesheet" href="../static/css/armarios.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">SENAI-SP</div>
+    <input type="text" placeholder="Buscar..." class="search-bar" />
+  </header>
+
+  <main>
+    <h1>ARMÁRIOS DA ESCOLA</h1>
+
+    <div class="bloco-selector">
+      <label for="bloco">Bloco:</label>
+      <select id="bloco" onchange="trocarBloco()">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+    </div>
+
+    <div class="armarios-grid" id="armarios">
+      <!-- Armários serão gerados aqui -->
+    </div>
+
+    <div class="paginacao">
+      <button onclick="paginaAnterior()">←</button>
+      <span id="pagina-atual">1</span>
+      <button onclick="proximaPagina()">→</button>
+    </div>
+  </main>
+
+  <script src="../static/js/armarios.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+}
+
+/* LADO ESQUERDO - IMAGEM */
+.left{
+    width:50%;
+    height:100%;
+    background: url("../img/senai-vila-senai-mario-henrique-simonsen.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+/* LADO DIREITO */
+.right{
+    width:50%;
+    height:100%;
+    background:#eeeeee;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* LOGO */
+.logo{
+    width:220px;
+    margin-bottom:60px;
+}
+
+/* INPUTS */
+.input-box{
+    width:300px;
+    margin-bottom:20px;
+}
+
+.input-box input{
+    width:100%;
+    padding:12px 20px;
+    border:none;
+    outline:none;
+    border-radius:25px;
+    background:#dcdcdc;
+    box-shadow: inset 0px 3px 6px rgba(0,0,0,0.2),
+                0px 3px 6px rgba(0,0,0,0.2);
+    font-size:14px;
+    color:#333;
+}
+
+/* ESQUECEU SENHA */
+.forgot{
+    font-size:12px;
+    color:#777;
+    margin-top:-10px;
+    margin-bottom:25px;
+}
+
+/* BOTÃO */
+button{
+    width:150px;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#e30613;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0px 4px 8px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+button:hover{
+    background:#c40510;
+}
