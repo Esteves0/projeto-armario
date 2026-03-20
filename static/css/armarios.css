@@ -1,69 +1,179 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
+:root {
+  --primary-color: #d50000;
+  --primary-hover: #b00000;
+  --bg-body: #f8f9fa;
+  --text-main: #212529;
+  --text-muted: #6c757d;
+  --white: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
 }
 
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Header mais elegante */
 header {
-  background-color: #d50000;
-  color: white;
-  padding: 1rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .search-bar {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  width: 250px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transition: var(--transition);
 }
 
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-bar:focus {
+  outline: none;
+  background: var(--white);
+  color: var(--text-main);
+  width: 300px;
+}
+
+/* Container Principal */
 main {
-  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
   text-align: center;
 }
 
 h1 {
-  color: #000;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* Seletor de Bloco Style */
 .bloco-selector {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
+.bloco-selector label {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+#bloco {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  background-color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+#bloco:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(213, 0, 0, 0.1);
+}
+
+/* Grid de Armários */
 .armarios-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
 }
 
 .armario {
-  background-color: #d50000;
-  color: white;
-  padding: 1rem;
-  border-radius: 6px;
+  background-color: var(--white);
+  color: var(--text-main);
+  padding: 1.5rem 1rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  border: 2px solid #000;
-  transition: transform 0.2s;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
 }
 
 .armario:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
+/* Paginação */
 .paginacao {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.paginacao button {
+  background-color: var(--white);
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.2rem;
+}
+
+.paginacao button:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+#pagina-atual {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .armarios-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .search-bar {
+    display: none; /* Esconde busca em telas muito pequenas ou reduz tamanho */
+  }
 }

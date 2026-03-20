@@ -1,6 +1,6 @@
 let pagina = 1;
 const armariosPorPagina = 18;
-
+const totalpaginas = 6;
 function gerarArmarios() {
   const container = document.getElementById("armarios");
   container.innerHTML = "";
@@ -8,8 +8,16 @@ function gerarArmarios() {
     const armario = document.createElement("div");
     armario.className = "armario";
     armario.innerText = `Armário ${i + (pagina - 1) * armariosPorPagina}`;
+
+    armario.onclick = () => {
+    const id = i + (pagina -1) * armariosPorPagina;
+    window.location.href = `armario.html?id=${id}`;
+  }
+
     container.appendChild(armario);
   }
+  
+  
 }
 
 function trocarBloco() {
@@ -27,9 +35,15 @@ function paginaAnterior() {
 }
 
 function proximaPagina() {
-  pagina++;
-  document.getElementById("pagina-atual").innerText = pagina;
-  gerarArmarios();
+  if (pagina < totalpaginas) {
+    pagina++;
+    document.getElementById("pagina-atual").innerText = pagina;
+    gerarArmarios();
+  }
+  
 }
+
+
+
 
 window.onload = gerarArmarios;
