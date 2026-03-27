@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from psycopg2.extras import RealDictCursor
 
-from databse import get_connection
+from database import get_connection
 
 
 app = Flask(__name__)
@@ -13,6 +13,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
 
 
     if request.method == 'GET':
@@ -23,10 +25,8 @@ def login():
             email = request.form.get('email')
             password = request.form.get('password')
 
-            conn = get_connection()
-            cur = conn.cursor(cursor_factory=RealDictCursor)
 
-            cur.execute('SELECT * FROM "user_adm" WHERE email = %s', (email,))
+            cur.execute('SELECT * FROM "adm_login" WHERE email = %s', (email,))
             user = cur.fetchone()
             if user:
 
@@ -39,8 +39,11 @@ def login():
         except Exception as e:
             return f"Ocorreu um erro: {e}"
         finally:
-            conn.close()
-            cur.close()
+            # No seu bloco login...
+            # Sempre feche o cursor antes da conexão
+            if 'cur' in locals(): cur.close()
+            if 'conn' in locals(): conn.close()
+
 
 
 
