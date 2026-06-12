@@ -1,0 +1,186 @@
+@import url('fichas.css');
+
+/* Ajustes de layout para alinhar filtros no Header */
+header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+/* Grupo de botões de rádio (Filtros) */
+.filter-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    align-items: center;
+}
+
+.filter-option input[type="radio"] {
+    display: none;
+}
+
+.filter-btn {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+.filter-option input[type="radio"]:checked + .filter-btn {
+    background-color: var(--white);
+    color: var(--text-main);
+    border-color: var(--white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.filter-option input[type="radio"]:checked + .btn-filtrar-ocupado {
+    background-color: #ffebee;
+    color: #c62828;
+    border-color: #ffcccc;
+}
+
+.filter-option input[type="radio"]:checked + .btn-filtrar-livre {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-color: #c4eed0;
+}
+
+.btn-aplicar-filtro {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 0.25rem;
+}
+
+.btn-aplicar-filtro:hover {
+    background-color: #f1f3f5;
+    transform: translateY(-1px);
+}
+
+/* Container do Grid de Cards */
+.armarios-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.armario {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    border: 1px solid #eaeaea;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.armario:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.armario-numero {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.armario-status {
+    font-size: 0.8rem;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.status-true { color: var(--primary-color); }
+.status-false { color: #28a745; }
+
+.sem-armarios {
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+    padding: 2rem;
+    text-align: center;
+}
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Estilos do Pop-up */
+.popup-mensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff0f0;
+    color: var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    z-index: 2000;
+    max-width: 400px;
+    animation: deslizarEntrada 0.4s ease-out;
+}
+
+.popup-mensagem span {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.popup-mensagem button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes deslizarEntrada {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

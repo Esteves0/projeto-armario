@@ -23,11 +23,50 @@ def get_connection():
         return None
 
 
+def inicializar_banco():
+    """Função para criar as tabelas e gerar os armários se eles não existirem"""
+    conn = get_connection()
+    if not conn:
+        return
+
+    try:
+        cursor = conn.cursor()
+
+
+        
+        total_armarios = 100
+        print(f"Verificando/Criando {total_armarios} armários no Neon...")
+        
+        for numero in range(1, total_armarios + 1):
+            cursor.execute("""
+                INSERT INTO armarios (numero, status) 
+                VALUES (%s, FALSE)
+                ON CONFLICT (numero) DO NOTHING;
+            """, (numero,))
+
+        # Salva tudo no Neon
+        conn.commit()
+        print("✅ Banco de dados inicializado e armários gerados com sucesso!")
+
+    except Exception as e:
+        print(f"❌ Erro ao inicializar o banco: {e}")
+        conn.rollback()
+    finally:
+        cursor.close()
+        conn.close()
+
+
 if __name__ == "__main__":
     print("Testando a conexão definitiva...")
     conn = get_connection()
     if conn:
         print("✅ SUCESSO ABSOLUTO! O Neon abriu as portas!")
         conn.close()
+        
+        # Pergunta se deseja resetar/inicializar os armários
+        resposta = input("Deseja rodar a inicialização dos armários agora? (s/n): ")
+        if resposta.lower() == 's':
+            inicializar_banco()
     else:
         print("❌ Ainda não deu. Veja o erro acima.")
+

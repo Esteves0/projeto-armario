@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Técnica do Armário</title>
+    <link rel="stylesheet" href="../static/css/fichas.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">SENAI Lockers</div>
+
+    </header>
+
+    <main>
+        <div class="ficha-container">
+
+            <div class="ficha-header">
+                <h2>Armário n° {{armario.numero}}</h2>
+                {% if armario.status %}
+                    <span class="status-badge status-ocupado">Alocado: Ocupado</span>
+                {% else %}
+                    <span class="status-badge status-livre">Alocado: Desocupado</span>
+                {% endif %}
+            </div>
+
+            <div class="ficha-body">
+                <div class="info-group">
+                    <span class="info-label">Situação Atual:</span>
+                    <span class="info-value">{% if armario.status %}Em uso{% else %}Livre para alocação{% endif %}</span>
+                </div>
+
+                {% if aluno %}
+                    <div class="info-group">
+                        <span class="info-label">Alocado por:</span>
+                        <span class="info-value destaque-nome">{{ aluno.nome }}</span>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">CPF:</span>
+                        <span class="info-value">{{ aluno.cpf }}</span>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Turma:</span>
+                        <span class="info-value">{{ aluno.turma }}</span>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Contato:</span>
+                        <span class="info-value">{{ aluno.contato }}</span>
+                    </div>
+
+                {% else %}
+                    <div class="info-group">
+                        <span class="info-label">Alocado por:</span>
+                        <span class="info-value" style="color: var(--text-muted, #6c757d); font-style: italic;">
+                            Nenhum aluno vinculado a este armário.
+                        </span>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="ficha-footer">
+                <a href="/armarios" class="btn-secundario">Voltar</a>
+                <a href="{{ url_for('editar_armario', id=armario.numero) }}" class="btn-primario">Editar Status</a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

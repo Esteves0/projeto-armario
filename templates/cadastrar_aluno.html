@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno - SENAI Lockers</title>
+    <link rel="stylesheet" href="../static/css/cadastro_aluno.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">SENAI Lockers</div>
+        <input type="text" class="search-bar" placeholder="Pesquisar...">
+    </header>
+
+    <main>
+        <div class="form-container">
+
+            <div class="form-header">
+                <h2>Cadastrar Novo Aluno</h2>
+                <p>Insira os dados do estudante para liberá-lo no sistema de armários.</p>
+            </div>
+
+            <form action="/cadastro_aluno" method="POST" class="form-body">
+
+                <div class="input-group">
+                    <label for="nome" class="input-label">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" class="form-input" placeholder="Ex: João da Silva" required>
+                </div>
+
+               <div class="input-group">
+    <label for="cpf" class="input-label">CPF (Apenas números)</label>
+    <input type="text" id="cpf" name="cpf" class="form-input"
+           maxlength="11" pattern="[0-9]{11}"
+           placeholder="Digite os 11 números" required>
+</div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="turma" class="input-label">Turma</label>
+                        <input type="text" id="turma" name="turma" class="form-input" placeholder="Ex: 1DES" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="contato" class="input-label">Contato (Número)</label>
+                        <input type="tel" id="contato" name="contato" class="form-input" placeholder="(19) 99999-9999" required>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <a href="/armarios" class="btn-secundario">Cancelar</a>
+                    <button type="submit" class="btn-primario">Salvar Cadastro</button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>

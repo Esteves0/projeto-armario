@@ -1,14 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Armarios AAPM</title>
+    <title>Painel de Armários - SENAI Lockers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
-    <a href="{{ url_for('login')}} " class = btn-edit>
-        Login
-    </a>
-    
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="popup-mensagem {{ category }}" id="popup-alerta">
+              <span>{{ message }}</span>
+              <button onclick="fecharPopup()">&times;</button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <header>
+        <div class="header-top">
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+                <div class="logo">SENAI Lockers</div>
+                <div class="admin-actions" style="display: flex; gap: 0.5rem;">
+                    <a href="/cadastro_aluno" style="padding: 0.5rem 1rem; background-color: rgba(255,255,255,0.15); color: white; text-decoration: none; font-size: 0.85rem; font-weight: bold; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.25); transition: var(--transition);">+ Cadastrar Aluno</a>
+                    <a href="/cadastro_user" style="padding: 0.5rem 1rem; background-color: rgba(255,255,255,0.15); color: white; text-decoration: none; font-size: 0.85rem; font-weight: bold; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.25); transition: var(--transition);">+ Cadastrar ADM</a>
+                </div>
+            </div>
+
+            <div class="search-form">
+                <form action="{{ url_for('buscar_armario') }}" method="GET" style="width: 100%; display: flex; justify-content: flex-end;">
+                    <input type="text" name="numero_armario" placeholder="Digite o número do armário" class="search-bar" />
+                </form>
+
+                <form action="{{ url_for('filtrar_armarios') }}" method="GET" class="filter-group">
+                    <label class="filter-option">
+                        <input type="radio" name="filtro_status" value="todos" {% if not filtro_ativo or filtro_ativo == 'todos' %}checked{% endif %} checked>
+                        <span class="filter-btn">Todos</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="filtro_status" value="ocupados" {% if filtro_ativo == 'ocupados'%}checked {%endif %} >
+                        <span class="filter-btn btn-filtrar-ocupado">Ocupados</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="filtro_status" value="desocupados" {% if filtro_ativo == 'desocupados'%} checked {%endif %}>
+                        <span class="filter-btn btn-filtrar-livre">Desocupados</span>
+                    </label>
+
+                    <button type="submit" class="btn-aplicar-filtro">Filtrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="armarios-container">
+            {% for armario in armarios %}
+                <a href="{{ url_for('ficha_armario', id = armario.numero) }}" class="armario">
+                  <div class="armario-numero">Armário {{ armario.numero }}</div>
+
+                  <span class="armario-status {% if armario.status %}status-true{% else %}status-false{% endif %}">
+                    {% if armario.status %}
+                      Ocupado
+                    {% else %}
+                      Desocupado
+                    {% endif %}
+                  </span>
+                </a>
+            {% else %}
+                <div class="sem-armarios">
+                  <h3>Nenhum armário cadastrado ou encontrado no sistema.</h3>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="paginacao">
+          <button onclick="paginaAnterior()">←</button>
+          <span id="pagina-atual">1</span>
+          <button onclick="proximaPagina()">→</button>
+        </div>
+    </main>
+
+    <script>
+        function fecharPopup() {
+            const popup = document.getElementById('popup-alerta');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
+        setTimeout(fecharPopup, 5000);
+    </script>
+
 </body>
 </html>

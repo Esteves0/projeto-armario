@@ -1,3 +1,18 @@
+.btn-cadastrar {
+  display: inline-block;
+  background-color: #e02b20; /* Cor padrão SENAI */
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-cadastrar:hover {
+  background-color: #c0251b;
+}
+
 :root {
   --primary-color: #d50000;
   --primary-hover: #b00000;
@@ -109,11 +124,12 @@ h1 {
 /* Grid de Armários */
 .armarios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 1.25rem;
   margin-bottom: 3rem;
 }
 
+/* Bloco único do Armário (Modificado para virar o retângulo perfeito) */
 .armario {
   background-color: var(--white);
   color: var(--text-main);
@@ -126,7 +142,9 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   font-weight: 600;
+  text-decoration: none; /* Remove sublinhado padrão de link */
 }
 
 .armario:hover {
@@ -172,8 +190,8 @@ h1 {
   .armarios-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .search-bar {
-    display: none; /* Esconde busca em telas muito pequenas ou reduz tamanho */
+    display: none;
   }
 }

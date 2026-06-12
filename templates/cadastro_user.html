@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login SENAI</title>
+    <title>Cadastro SENAI</title>
     <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
@@ -13,19 +13,21 @@
     <div class="right">
         <img src="../static/img/logo.png" class="logo" alt="SENAI">
 
-        <form action="/login" method="POST">
-            
+        <form action="/cadastro_user" method="POST">
+
             <div class="input-box">
-                <input type="text" name="email" placeholder="Username">
+                <input type="text" name="name" placeholder="Name">
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="email" placeholder="Email">
             </div>
 
             <div class="input-box">
                 <input type="password" name="password" placeholder="Password">
             </div>
 
-            <div class="forgot">Forgot Password?</div>
-
-            <button type="submit">Login</button>
+            <button type="submit">Cadastrar</button>
 
         </form>
         </div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Ficha - SENAI Lockers</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/fichas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_ficha.css') }}">
+
+
+</head>
+<body>
+
+    <header>
+        <div class="logo">SENAI Lockers</div>
+
+    </header>
+
+    <main>
+        <div class="form-container">
+
+            <form action="{{ url_for('editar_armario', id=armario.numero) }}" method="POST">
+
+                <div class="form-header">
+                    <h2>Editando Armário n° {{armario.numero}}</h2>
+                    <p>Altere a disponibilidade ou o vínculo do aluno abaixo.</p>
+                </div>
+
+                <div class="form-body">
+
+                    <div class="input-group">
+                        <label class="input-label" for="status">Disponibilidade</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="1" {% if armario.status %}selected{% endif %}>Ocupado</option>
+                            <option value="0" {% if not armario.status %}selected{% endif %}>Desocupado</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label" for="id_aluno">Alocado para:</label>
+                        <select name="id_aluno" id="id_aluno" class="form-select">
+                            <option value="">-- Nenhum Aluno Vinculado --</option>
+                            {% for aluno in alunos %}
+                                <option value="{{ aluno.id }}" {% if armario.aluno_id == aluno.id %}selected{% endif %}>
+                                    {{ aluno.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-footer">
+                        <a href="{{ url_for('ficha_armario', id=armario.numero) }}" class="btn-secundario">Cancelar</a>
+                        <button type="submit" class="btn-primario">Salvar Alterações</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>
